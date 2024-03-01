@@ -4,8 +4,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddItem from "./add-item.component.tsx";
+import React, {useCallback} from "react";
 
-export default function SideMenu(){
+export default function SideMenu({setList} : { setList: React.Dispatch<React.SetStateAction<string[]>>}){
+
+  const addNewItem = useCallback((name: string, file: File | null) => {
+    setList((prev) => {
+      return [...prev, name]
+    })
+  }, [setList])
 
   return (
     <>
@@ -25,7 +32,7 @@ export default function SideMenu(){
               marginLeft: 50
           }}>
             <Grid item xs={12}>
-              <p style={{color: "black"}}><AddItem/></p>
+              <p style={{color: "black"}}><AddItem onAdd={addNewItem}/></p>
               <Button
                 variant="contained"
                 key="add"
