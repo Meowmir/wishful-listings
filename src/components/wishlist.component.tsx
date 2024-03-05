@@ -1,7 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Container, IconButton} from "@mui/material";
-import React, {useCallback, useState} from "react";
+import React, {useCallback} from "react";
 
 export default function WishList({ list, edit, setList } : { list: string[], edit: boolean, setList: React.Dispatch<React.SetStateAction<string[]>>}) {
   const iconStyle = {
