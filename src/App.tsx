@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <WishList list={list} edit={edit}/>
+      <WishList list={list} edit={edit} setList={setList}/>
       <SideMenu setList={setList} setEdit={setEdit} edit={edit}/>
     </>
   )

@@ -1,8 +1,9 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Container, IconButton} from "@mui/material";
+import React, {useCallback, useState} from "react";
 
-export default function WishList({ list, edit } : { list: string[], edit: boolean}) {
+export default function WishList({ list, edit, setList } : { list: string[], edit: boolean, setList: React.Dispatch<React.SetStateAction<string[]>>}) {
   const iconStyle = {
     width: 20,
     verticalAlign: "top",
@@ -10,10 +11,11 @@ export default function WishList({ list, edit } : { list: string[], edit: boolea
     color: "white"
   }
 
-  const deleteItem = (item: string) => {
-    const itemToRemove = list.indexOf(item)
-    list.splice(itemToRemove)
-  }
+  const deleteItem = useCallback((item: string) => {
+    setList((prev) => {
+      return prev.filter((itemToRemove: string) => item !== itemToRemove)
+    })
+  }, [setList])
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function WishList({ list, edit } : { list: string[], edit: boolea
                 <IconButton size="small">
                   <EditIcon style={iconStyle}/>
                 </IconButton>
-                <IconButton size="small" onClick={() => deleteItem}>
+                <IconButton size="small" onClick={() => deleteItem(item)}>
                   <DeleteIcon style={iconStyle}/>
                 </IconButton>
               </li>
