@@ -1,18 +1,39 @@
 import {Box, Button, Grid} from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddItem from "./add-item.component.tsx";
 import React, {useCallback} from "react";
+import SaveIcon from '@mui/icons-material/Save';
 
-export default function SideMenu({setList} : { setList: React.Dispatch<React.SetStateAction<string[]>>}){
+export default function SideMenu({setList, setEdit, edit} : { setList: React.Dispatch<React.SetStateAction<string[]>>, setEdit: React.Dispatch<React.SetStateAction<boolean>>, edit: boolean}){
 
   const addNewItem = useCallback((name: string, file: File | null) => {
     setList((prev) => {
       return [...prev, name]
     })
   }, [setList])
+
+  const editSaveButton = (edit: boolean, setEdit: React.Dispatch<React.SetStateAction<boolean>>) => {
+    if(edit) {
+      return <Button
+        variant="contained"
+        key="edit"
+        startIcon={<SaveIcon/>}
+        onClick={() => setEdit(false)}
+      >
+        Save
+      </Button>
+    } return <Button
+      variant="contained"
+      key="edit"
+      startIcon={<EditIcon/>}
+      onClick={() => setEdit(true)}
+    >
+      Edit
+    </Button>
+  }
+
 
   return (
     <>
@@ -35,7 +56,7 @@ export default function SideMenu({setList} : { setList: React.Dispatch<React.Set
               <p style={{color: "black"}}><AddItem onAdd={addNewItem}/></p>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" key="edit" startIcon={<EditIcon/>}>Edit</Button>
+              {editSaveButton(edit, setEdit)}
             </Grid>
             <Grid item xs={12}>
               <Button variant="contained" key="others" startIcon={<CardGiftcardIcon/>}>Hugo's List</Button>
