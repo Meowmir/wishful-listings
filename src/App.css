@@ -4,3 +4,7 @@
   padding: 2rem;
   text-align: left;
 }
+
+input[type="file"] {
+  display: none;
+}

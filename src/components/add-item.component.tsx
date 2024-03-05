@@ -1,4 +1,4 @@
-import {Modal, Box, Button, TextField} from "@mui/material";
+import {Modal, Box, Button, TextField, Grid} from "@mui/material";
 import {useState} from "react";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -58,25 +58,40 @@ export default function AddItem({ onAdd } : { onAdd: (name: string, file: File |
         >
           <Box sx={{ ...modalStyle }}>
           <h3 style={{color: "black"}}>What do you wish for?</h3>
-            <TextField
-              id="outlined-basic"
-              label="Item"
-              variant="outlined"
-              required
-              onChange={
-              (event) => {
-                setItemName(event.target.value)
-              }
-            }/>
-            <input
-              type="file"
-              id="logo"
-              onChange={handleFileChange}
-              accept="image/*"
-            />
-            <Button onClick={handleSubmit}>
-              <AddIcon/> Add
-          </Button>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  label="Item"
+                  variant="standard"
+                  required
+                  onChange={
+                    (event) => {
+                      setItemName(event.target.value)
+                    }
+                  }/>
+              </Grid>
+              <Grid item xs={12}>
+                <label style={{
+                  backgroundColor: "#ffbf69",
+                  cursor: "pointer",
+                  padding: 5,
+                  borderRadius: 3
+                }}
+                >
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
+                  Choose image
+                </label>
+              </Grid>
+              <Grid item xs={12}>
+                <Button onClick={handleSubmit} variant="contained" style={{backgroundColor: "#ff9f1c"}}>
+                  <AddIcon/> Add
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
       </Modal>
     </>

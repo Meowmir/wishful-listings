@@ -33,13 +33,6 @@ export default function SideMenu({setList} : { setList: React.Dispatch<React.Set
           }}>
             <Grid item xs={12}>
               <p style={{color: "black"}}><AddItem onAdd={addNewItem}/></p>
-              <Button
-                variant="contained"
-                key="add"
-                startIcon={<AddIcon/>}
-              >
-                Add
-              </Button>
             </Grid>
             <Grid item xs={12}>
               <Button variant="contained" key="edit" startIcon={<EditIcon/>}>Edit</Button>
