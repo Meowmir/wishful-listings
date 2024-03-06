@@ -5,6 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AddItem from "./add-item.component.tsx";
 import React, {useCallback} from "react";
 import SaveIcon from '@mui/icons-material/Save';
+import EditItemConfirmation from "./edit-item-confirmation.component.tsx";
 
 export default function SideMenu({setList, setEdit, edit} : { setList: React.Dispatch<React.SetStateAction<string[]>>, setEdit: React.Dispatch<React.SetStateAction<boolean>>, edit: boolean}){
 
