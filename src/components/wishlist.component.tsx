@@ -30,6 +30,17 @@ export default function WishList({
     [setList],
   );
 
+  const saveUpdatedItem = useCallback(
+    (itemBeingUpdated: string, newValue: string) => {
+      setList((prev) => {
+        return prev.map((item) =>
+          item === itemBeingUpdated ? (itemBeingUpdated = newValue) : item,
+        );
+      });
+    },
+    [setList],
+  );
+
   return (
     <>
       <Container style={{ marginRight: 300 }}>
@@ -38,17 +49,17 @@ export default function WishList({
           <EditItemConfirmation
             item={currentlyEditing}
             onEdit={(_item, _currentValue) => {
-              // blah blah
+              saveUpdatedItem(_item, _currentValue);
               setCurrentlyEditing(null);
             }}
             onCancel={() => setCurrentlyEditing(null)}
           />
         )}
         <ol>
-          {list.map((item) => {
+          {list.map((item, index) => {
             if (edit) {
               return (
-                <li key={item}>
+                <li key={index}>
                   <span style={{ marginRight: 10 }}>{item}</span>
                   <IconButton
                     size="small"
