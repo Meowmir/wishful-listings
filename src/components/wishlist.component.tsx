@@ -22,9 +22,11 @@ export default function WishList({
   const [currentlyEditing, setCurrentlyEditing] = useState<string | null>(null);
 
   const deleteItem = useCallback(
-    (item: string) => {
+    (index: number) => {
       setList((prev) => {
-        return prev.filter((itemToRemove: string) => item !== itemToRemove);
+        return prev.filter(
+          (_, indexToRemove: number) => index !== indexToRemove,
+        );
       });
     },
     [setList],
@@ -67,7 +69,7 @@ export default function WishList({
                   >
                     <EditIcon style={iconStyle} />
                   </IconButton>
-                  <IconButton size="small" onClick={() => deleteItem(item)}>
+                  <IconButton size="small" onClick={() => deleteItem(index)}>
                     <DeleteIcon style={iconStyle} />
                   </IconButton>
                 </li>
