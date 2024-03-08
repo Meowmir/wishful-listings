@@ -3,15 +3,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Container, IconButton } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import EditItemConfirmation from "./edit-item-confirmation.component.tsx";
+import { Item } from "../shared/types.ts";
 
 export default function WishList({
   list,
   edit,
   setList,
 }: {
-  list: string[];
+  list: Item[];
   edit: boolean;
-  setList: React.Dispatch<React.SetStateAction<string[]>>;
+  setList: React.Dispatch<React.SetStateAction<Item[]>>;
 }) {
   const iconStyle = {
     width: 20,
@@ -19,7 +20,7 @@ export default function WishList({
     margin: 2,
     color: "white",
   };
-  const [currentlyEditing, setCurrentlyEditing] = useState<string | null>(null);
+  const [currentlyEditing, setCurrentlyEditing] = useState<Item | null>(null);
 
   const deleteItem = useCallback(
     (index: number) => {
@@ -33,10 +34,10 @@ export default function WishList({
   );
 
   const saveUpdatedItem = useCallback(
-    (itemBeingUpdated: string, newValue: string) => {
+    (oldItem: Item, itemBeingUpdated: Item) => {
       setList((prev) => {
         return prev.map((item) =>
-          item === itemBeingUpdated ? (itemBeingUpdated = newValue) : item,
+          item.name === oldItem.name ? itemBeingUpdated : item,
         );
       });
     },
@@ -50,8 +51,8 @@ export default function WishList({
         {currentlyEditing && (
           <EditItemConfirmation
             item={currentlyEditing}
-            onEdit={(_item, _currentValue) => {
-              saveUpdatedItem(_item, _currentValue);
+            onEdit={(item, currentValue) => {
+              saveUpdatedItem(item, currentValue);
               setCurrentlyEditing(null);
             }}
             onCancel={() => setCurrentlyEditing(null)}
@@ -62,7 +63,7 @@ export default function WishList({
             if (edit) {
               return (
                 <li key={index}>
-                  <span style={{ marginRight: 10 }}>{item}</span>
+                  <span style={{ marginRight: 10 }}>{item.name}</span>
                   <IconButton
                     size="small"
                     onClick={() => setCurrentlyEditing(item)}
@@ -75,7 +76,7 @@ export default function WishList({
                 </li>
               );
             }
-            return <li key={item}>{item}</li>;
+            return <li key={index}>{item.name}</li>;
           })}
         </ol>
       </Container>

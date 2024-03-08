@@ -7,15 +7,16 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { Item } from "../shared/types.ts";
 
 export default function EditItemConfirmation({
   item,
   onCancel,
   onEdit,
 }: {
-  item: string;
+  item: Item;
   onCancel: () => void;
-  onEdit: (old: string, update: string) => void;
+  onEdit: (old: Item, update: Item) => void;
 }) {
   const [currentValue, setCurrentValue] = useState(item);
 
@@ -27,10 +28,10 @@ export default function EditItemConfirmation({
           <TextField
             InputLabelProps={{ shrink: false }}
             variant="outlined"
-            label={item}
-            value={currentValue}
+            label={item.name}
+            value={currentValue.name}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setCurrentValue(event.target.value);
+              setCurrentValue({ ...currentValue, name: event.target.value });
             }}
           />
         </DialogContent>
