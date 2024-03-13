@@ -5,8 +5,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AddItem from "./add-item.component.tsx";
 import React, {useCallback} from "react";
 import SaveIcon from '@mui/icons-material/Save';
+import {Register} from "./register.components.tsx";
 
-export default function SideMenu({setList, setEdit, edit} : { setList: React.Dispatch<React.SetStateAction<string[]>>, setEdit: React.Dispatch<React.SetStateAction<boolean>>, edit: boolean}){
+export default function SideMenu({setList, setEdit, edit}: {
+  setList: React.Dispatch<React.SetStateAction<string[]>>,
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>,
+  edit: boolean
+}) {
 
   const addNewItem = useCallback((name: string, file: File | null) => {
     setList((prev) => {
@@ -15,7 +20,7 @@ export default function SideMenu({setList, setEdit, edit} : { setList: React.Dis
   }, [setList])
 
   const editSaveButton = (edit: boolean, setEdit: React.Dispatch<React.SetStateAction<boolean>>) => {
-    if(edit) {
+    if (edit) {
       return <Button
         variant="contained"
         key="edit"
@@ -24,7 +29,8 @@ export default function SideMenu({setList, setEdit, edit} : { setList: React.Dis
       >
         Save
       </Button>
-    } return <Button
+    }
+    return <Button
       variant="contained"
       key="edit"
       startIcon={<EditIcon/>}
@@ -45,26 +51,27 @@ export default function SideMenu({setList, setEdit, edit} : { setList: React.Dis
         width: 300,
         backgroundColor: "white",
       }}>
-          <Grid
-            container
-            spacing={2}
-            style={{
-              marginTop: 50,
-              marginLeft: 50
+        <Register/>
+        <Grid
+          container
+          spacing={2}
+          style={{
+            marginTop: 10,
+            marginLeft: 50
           }}>
-            <Grid item xs={12}>
-              <p style={{color: "black"}}><AddItem onAdd={addNewItem}/></p>
-            </Grid>
-            <Grid item xs={12}>
-              {editSaveButton(edit, setEdit)}
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant="contained" key="others" startIcon={<CardGiftcardIcon/>}>Hugo's List</Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant="contained" key="settings" startIcon={<SettingsIcon/>}>Settings</Button>
-            </Grid>
+          <Grid item xs={12}>
+            <p style={{color: "black"}}><AddItem onAdd={addNewItem}/></p>
           </Grid>
+          <Grid item xs={12}>
+            {editSaveButton(edit, setEdit)}
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" key="others" startIcon={<CardGiftcardIcon/>}>Hugo's List</Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" key="settings" startIcon={<SettingsIcon/>}>Settings</Button>
+          </Grid>
+        </Grid>
       </Box>
     </>
   )

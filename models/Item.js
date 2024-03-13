@@ -1,9 +1,7 @@
-const {
-    Schema,
-    model
-} = require("mongoose");
+import {Schema, model} from "./globals"
+import * as mongoose from "./globals";
 
-const MySchema = new Schema({
+const ItemSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -15,6 +13,4 @@ const MySchema = new Schema({
     },
 });
 
-const TaskModel = module.exports = model("User", MySchema);
-
-module.exports = TaskModel
+module.exports = mongoose.model("Item", ItemSchema);
